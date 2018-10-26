@@ -2,6 +2,8 @@ from marvel.base import Base
 from marvel.modules.characters import Characters
 from marvel.modules.events import Events
 from marvel.modules.series import Series
+from marvel.modules.comics import Comics
+from marvel.modules.creators import Creators
 
 
 class Marvel(Base):
@@ -11,3 +13,6 @@ class Marvel(Base):
         self.events = Events(requester=self.requester)
         self.series = Series(requester=self.requester)
 
+
+        self.comics = Comics(requester=self.requester)
+        self.creators = Creators(requester=self.requester)
