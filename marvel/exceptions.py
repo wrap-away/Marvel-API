@@ -1,8 +1,8 @@
-class InvalidInputException(Exception):
+class MarvelException(Exception):
     pass
 
 
-class NotFoundException(Exception):
+class BadInputException(Exception):
     pass
 
 

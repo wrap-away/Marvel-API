@@ -6,25 +6,25 @@ class Characters(BaseModule):
         super().__init__(requester)
 
     def all(self):
-        data, headers = self.r.request('categories')
+        data, headers = self.r.request('characters')
         return data
 
-    def get(self, **kwargs):
-        data, headers = self.r.request('categories', payload=locals())
+    def get(self, identifier, **kwargs):
+        data, headers = self.r.request('characters', identifier=identifier, payload=kwargs)
         return data
 
-    def comics(self, **kwargs):
-        data, headers = self.r.request('categories', payload=locals(), sub_endpoint="comics")
+    def comics(self, identifier, **kwargs):
+        data, headers = self.r.request('characters', identifier=identifier, payload=kwargs, sub_endpoint="comics")
         return data
 
-    def events(self, **kwargs):
-        data, headers = self.r.request('categories', payload=locals(), sub_endpoint="events")
+    def events(self, identifier, **kwargs):
+        data, headers = self.r.request('characters', identifier=identifier, payload=kwargs, sub_endpoint="events")
         return data
 
-    def series(self, **kwargs):
-        data, headers = self.r.request('categories', payload=locals(), sub_endpoint="series")
+    def series(self, identifier, **kwargs):
+        data, headers = self.r.request('characters', identifier=identifier, payload=kwargs, sub_endpoint="series")
         return data
 
-    def stories(self, **kwargs):
-        data, headers = self.r.request('categories', payload=locals(), sub_endpoint="stories")
+    def stories(self, identifier, **kwargs):
+        data, headers = self.r.request('characters', identifier=identifier, payload=kwargs, sub_endpoint="stories")
         return data

@@ -22,12 +22,13 @@ class Requester(EndpointManager):
         self.r = requests.get(url, params=query)
         if raw:
             return self.r
-        self.check_for_exceptions(self.r)
-        return self.r.json(), self.r.headers
+        json_data = self.r.json()
+        self.check_for_exceptions(self.r, json_data)
+        return json_data, self.r.headers
 
     def get_query_with_authentication_params(self, payload):
         timestamp = int(time())
-        input_string = str(timestamp) + self.PUBLIC_KEY + self.PRIVATE_KEY
+        input_string = str(timestamp) + self.PRIVATE_KEY + self.PUBLIC_KEY
         hash = md5(input_string.encode("utf-8")).hexdigest()
         payload['ts'] = timestamp
         payload['apikey'] = self.PUBLIC_KEY
@@ -35,15 +36,11 @@ class Requester(EndpointManager):
         return payload
 
     @staticmethod
-    def check_for_exceptions(request):
+    def check_for_exceptions(request, json_data):
         status_code = request.status_code
         if status_code == 200:
             return
-        elif status_code == 400:
-            raise InvalidInputException("Invalid input")
-        elif status_code == 404:
-            raise NotFoundException("Not Found")
-        elif status_code == 403:
-            raise InvalidAPIKEYException("Invalid API KEY")
+        elif 'code' in json_data and 'message' in json_data:
+            raise MarvelException(json_data['code'] + json_data['message'])
         else:
-            raise ConnectionErrorException("The website couldn't be retrieved.")
+            raise BadInputException("Something went horribly wrong.")

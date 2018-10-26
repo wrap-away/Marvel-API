@@ -1,6 +1,6 @@
 class EndpointManager:
     def __init__(self):
-        self.base_url = "https://gateway.marvel.com/v1"
+        self.base_url = "https://gateway.marvel.com/v1/public"
         self.endpoints = self.get_endpoints()
 
     def get_endpoints(self):
