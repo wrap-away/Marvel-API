@@ -5,8 +5,8 @@ class Characters(BaseModule):
     def __init__(self, requester):
         super().__init__(requester)
 
-    def all(self):
-        data, headers = self.r.request('characters')
+    def all(self, **kwargs):
+        data, headers = self.r.request('characters', payload=kwargs)
         return data
 
     def get(self, identifier, **kwargs):

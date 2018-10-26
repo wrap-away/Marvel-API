@@ -5,8 +5,8 @@ class Comics(BaseModule):
     def __init__(self, requester):
         super().__init__(requester)
 
-    def all(self):
-        data, headers = self.r.request('comics')
+    def all(self, **kwargs):
+        data, headers = self.r.request('comics', payload=kwargs)
         return data
 
     def get(self, identifier, **kwargs):
