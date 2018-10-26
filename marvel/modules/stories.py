@@ -19,6 +19,7 @@ class Stories(BaseModule):
 
     def comics(self, identifier, **kwargs):
         data, headers = self.r.requester('stories', identifier=identifier, payload=kwargs, sub_endpoint='comics')
+        return data
 
     def creators(self, identifier, **kwargs):
         data, headers = self.r.request('stories', identifier=identifier, payload=kwargs, sub_endpoint="creators")
