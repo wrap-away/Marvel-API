@@ -2,6 +2,18 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
+
+def requirements():
+    """Build the requirements list for this project"""
+    requirements_list = []
+
+    with open('requirements.txt') as requirements:
+        for install in requirements:
+            requirements_list.append(install.strip())
+
+    return requirements_list
+
+
 file_path = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
@@ -47,5 +59,5 @@ setup(
 
     packages=find_packages(exclude=['sample']),
 
-    install_requires=['requests'],
+    install_requires=requirements(),
 )
