@@ -16,8 +16,10 @@ class Requester(EndpointManager):
         if payload is None:
             payload = {}
         url = self.endpoints[endpoint_name]
+        if identifier is not None:
+            url += "/" + str(identifier)
         if sub_endpoint is not None:
-            url += "/" + str(identifier) + "/" + sub_endpoint
+            url += "/" + sub_endpoint
         query = self.get_query_with_authentication_params(payload)
         self.r = requests.get(url, params=query)
         if raw:
