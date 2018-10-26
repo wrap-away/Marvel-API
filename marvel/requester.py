@@ -12,24 +12,17 @@ class Requester(EndpointManager):
         self.PRIVATE_KEY = PRIVATE_KEY
         self.r = object
 
-    def request(self, endpoint_name=None, endpoint_format=None, payload=None, raw=False, raw_url=None):
+    def request(self, endpoint_name=None, payload=None, sub_endpoint=None, identifier=None, raw=None):
         if payload is None:
             payload = {}
-        if endpoint_format:
-            raw_url = self.endpoints[endpoint_name]
-            if isinstance(endpoint_format, str):
-                url = raw_url.format(endpoint_format)
-            else:
-                url = raw_url.format(*endpoint_format)
-        elif raw_url:
-            url = raw_url
-        else:
-            url = self.endpoints[endpoint_name]
+        url = self.endpoints[endpoint_name]
+        if sub_endpoint is not None:
+            url += "/" + str(identifier) + "/" + sub_endpoint
         query = self.get_query_with_authentication_params(payload)
         self.r = requests.get(url, params=query)
-        self.check_for_exceptions(self.r)
         if raw:
             return self.r
+        self.check_for_exceptions(self.r)
         return self.r.json(), self.r.headers
 
     def get_query_with_authentication_params(self, payload):
