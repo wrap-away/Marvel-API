@@ -118,3 +118,6 @@ Finally, the sub resources that each object has are as follows:
 
 You can catch any exception caused by Marvel API such as authentication error, bad input error, server down error, etc by handling the `MarvelException` at `marvel/exceptions.py`.
 
+# Running Tests
+
+`python -m pytest tests/`
