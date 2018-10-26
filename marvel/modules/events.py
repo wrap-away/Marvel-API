@@ -5,8 +5,8 @@ class Events(BaseModule):
     def __init__(self, requester):
         super().__init__(requester)
 
-    def all(self):
-        data, headers = self.r.request('events')
+    def all(self, **kwargs):
+        data, headers = self.r.request('events', payload=kwargs)
         return data
 
     def get(self, identifier, **kwargs):
