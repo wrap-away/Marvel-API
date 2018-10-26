@@ -1,13 +1,15 @@
 import requests
-from marvel.endpoint_manager import EndpointManager
+from hashlib import md5
+from time import time
 from marvel.exceptions import *
+from marvel.endpoint_manager import EndpointManager
 
 
 class Requester(EndpointManager):
-    def __init__(self, API_KEY=""):
+    def __init__(self, PUBLIC_KEY, PRIVATE_KEY):
         super().__init__()
-        self.API_KEY = API_KEY
-        self.headers = {'user-key': self.API_KEY}
+        self.PUBLIC_KEY = PUBLIC_KEY
+        self.PRIVATE_KEY = PRIVATE_KEY
         self.r = object
 
     def request(self, endpoint_name=None, endpoint_format=None, payload=None, raw=False, raw_url=None):
@@ -23,11 +25,21 @@ class Requester(EndpointManager):
             url = raw_url
         else:
             url = self.endpoints[endpoint_name]
-        self.r = requests.get(url, params=payload, headers=self.headers)
+        query = self.get_query_with_authentication_params(payload)
+        self.r = requests.get(url, params=query)
         self.check_for_exceptions(self.r)
         if raw:
             return self.r
         return self.r.json(), self.r.headers
+
+    def get_query_with_authentication_params(self, payload):
+        timestamp = int(time())
+        input_string = str(timestamp) + self.PUBLIC_KEY + self.PRIVATE_KEY
+        hash = md5(input_string.encode("utf-8")).hexdigest()
+        payload['ts'] = timestamp
+        payload['apikey'] = self.PUBLIC_KEY
+        payload['hash'] = hash
+        return payload
 
     @staticmethod
     def check_for_exceptions(request):
