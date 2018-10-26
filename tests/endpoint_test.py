@@ -28,3 +28,17 @@ def test_comics():
     comic_format = comic['data']['results'][0]['format']
     assert title == "Spider-Man: 101 Ways to End the Clone Saga (1997) #1"
     assert comic_format == "Comic"
+
+def test_creators():
+    creator = m.creators.all(firstName="Stan", lastName="Lee")
+
+    fullName = creator['data']['results'][0]['fullName']
+    comics = creator['data']['results'][0]['comics']
+    series = creator['data']['results'][0]['series']
+    events = creator['data']['results'][0]['events']
+    stories = creator['data']['results'][0]['stories']
+    assert fullName == "Stan Lee"
+    assert type(comics) is dict
+    assert type(series) is dict
+    assert type(events) is dict
+    assert type(stories) is dict
