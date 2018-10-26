@@ -12,7 +12,7 @@ class Requester(EndpointManager):
         self.PRIVATE_KEY = PRIVATE_KEY
         self.r = object
 
-    def request(self, endpoint_name=None, payload=None, sub_endpoint=None, identifier=None, raw=None):
+    def request(self, endpoint_name, payload=None, sub_endpoint=None, identifier=None, raw=None):
         if payload is None:
             payload = {}
         url = self.endpoints[endpoint_name]
