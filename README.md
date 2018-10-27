@@ -64,55 +64,17 @@ Similarly, you could apply the same logic to different objects, an example:
 Finally, the sub resources that each object has are as follows:
 
 - Characters
-    - all
-    - get
-    - comics
-    - events
-    - series
-    - stories
-
+    - `all`, `get`, `comics`, `events`, `series`, `stories`
 - Comics
-    - all
-    - get
-    - characters
-    - creators
-    - events
-    - stories
-
+    - `all`, `get`, `characters`, `creators`, `events`, `stories`
 - Creators
-    - all
-    - get
-    - comics
-    - events
-    - series
-    - stories
-
+    - `all`, `get`, `comics`, `events`, `series`, `stories`
 - Events
-    - all
-    - get
-    - characters
-    - comics
-    - creators
-    - series
-    - stories
-
+    - `all`, `get`, `characters`, `comics`, `creators`, `series`, `stories`
 - Series
-    - all
-    - get
-    - characters
-    - comics
-    - creators
-    - events
-    - stories
-
+    - `all`, `get`, `characters`, `comics`, `creators`, `events`, `stories`
 - Stories
-    - all
-    - get
-    - characters
-    - comics
-    - creators
-    - events
-    - series
+    - `all`, `get`, `characters`, `comics`, `creators`, `events`, `series`
 
 # Exception Handling
 
