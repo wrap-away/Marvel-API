@@ -7,12 +7,26 @@ from marvel.endpoint_manager import EndpointManager
 
 class Requester(EndpointManager):
     def __init__(self, PUBLIC_KEY, PRIVATE_KEY):
+        """
+        Requester class responsible for making HTTP requests.
+        :param PUBLIC_KEY: str
+        :param PRIVATE_KEY: str
+        """
         super().__init__()
         self.PUBLIC_KEY = PUBLIC_KEY
         self.PRIVATE_KEY = PRIVATE_KEY
         self.r = object
 
     def request(self, endpoint_name, payload=None, sub_endpoint=None, identifier=None, raw=None):
+        """
+        Request a route with data.
+        :param endpoint_name: str
+        :param payload: dict
+        :param sub_endpoint: str
+        :param identifier: int
+        :param raw: bool
+        :return: dict, dict
+        """
         if payload is None:
             payload = {}
         url = self.endpoints[endpoint_name]
@@ -29,6 +43,11 @@ class Requester(EndpointManager):
         return json_data, self.r.headers
 
     def get_query_with_authentication_params(self, payload):
+        """
+        Authenticate a request.
+        :param payload: dict
+        :return: dict
+        """
         timestamp = int(time())
         input_string = str(timestamp) + self.PRIVATE_KEY + self.PUBLIC_KEY
         hash = md5(input_string.encode("utf-8")).hexdigest()
@@ -39,6 +58,12 @@ class Requester(EndpointManager):
 
     @staticmethod
     def check_for_exceptions(request, json_data):
+        """
+        Raises exception for errors.
+        :param request: Request
+        :param json_data: dict
+        :return: None
+        """
         status_code = request.status_code
         if status_code == 200:
             return
