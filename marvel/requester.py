@@ -50,8 +50,8 @@ class Requester(EndpointManager):
                 error_message = "{} {}".format(str(json_data['code']), json_data['message'])
                 raise MarvelException(error_message)
             else:
-                print(json_data)
-                raise BadInputException("Something went horribly wrong.") 
+                error_message = "Something went horribly wrong. {}".format(json_data)
+                raise BadInputException(error_message)
         else:
-            print(json_data)
-            raise BadInputException("Something went horribly wrong.")
+            error_message = "Something went horribly wrong. {}".format(json_data)
+            raise BadInputException(error_message)
