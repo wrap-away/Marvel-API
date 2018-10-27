@@ -42,7 +42,8 @@ class Requester(EndpointManager):
         status_code = request.status_code
         if status_code == 200:
             return
-        elif 'code' in json_data and 'message' in json_data:
-            raise MarvelException(json_data['code'] + json_data['message'])
+        elif 'code' in json_data and 'status' in json_data:
+            error_message = "{} {}".format(str(json_data['code']), json_data['status'])
+            raise MarvelException(error_message)
         else:
             raise BadInputException("Something went horribly wrong.")
