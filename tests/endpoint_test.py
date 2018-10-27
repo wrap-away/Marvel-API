@@ -79,11 +79,55 @@ def test_events(marvel):
     event = marvel.events.all(name="Infinity")
     name = event['data']['results'][0]['title']
     comic_id = event['data']['results'][0]['id']
+    comics = event['data']['results'][0]['comics']
+    series = event['data']['results'][0]['series']
+    characters = event['data']['results'][0]['characters']
+    stories = event['data']['results'][0]['stories']
+    creators = event['data']['results'][0]['creators']
     assert name == "Infinity"
     assert comic_id == 315
+    assert type(comics) is dict
+    assert type(series) is dict
+    assert type(characters) is dict
+    assert type(stories) is dict
+    assert type(creators) is dict
+
 
 def test_series(marvel):
-    pass
+    with pytest.raises(MarvelException):
+        marvel.series.all(blah_blah="Incrudulous Hork")
+    
+    series = marvel.series.get(18454)
+
+    title = series['data']['results'][0]['title']
+    comics = series['data']['results'][0]['comics']
+    events = series['data']['results'][0]['events']
+    characters = series['data']['results'][0]['characters']
+    stories = series['data']['results'][0]['stories']
+    creators = series['data']['results'][0]['creators']
+    assert title == "100th Anniversary Special (2014)"
+    assert type(comics) is dict
+    assert type(events) is dict
+    assert type(characters) is dict
+    assert type(stories) is dict
+    assert type(creators) is dict
 
 def test_stories(marvel):
-    pass
+    with pytest.raises(MarvelException):
+        marvel.stories.all(characters="Iron Man")
+
+    stories = marvel.stories.get(998)
+
+    title = stories['data']['results'][0]['title']
+    comics = stories['data']['results'][0]['comics']
+    events = stories['data']['results'][0]['events']
+    characters = stories['data']['results'][0]['characters']
+    creators = stories['data']['results'][0]['creators']
+    series = stories['data']['results'][0]['series']
+
+    assert title == "Interior #998"
+    assert type(comics) is dict
+    assert type(events) is dict
+    assert type(characters) is dict
+    assert type(creators) is dict
+    assert type(series) is dict    
