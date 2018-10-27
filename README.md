@@ -20,7 +20,7 @@ Usage is as simple as it gets:
     m = Marvel(PUBLIC_KEY, PRIVATE_KEY)
 
 Now there are six objects presented namely, `characters`, `comics`, `creators`, `events`, `series` and `stories`
-as listed at [Developers](https://developers.zomato.com/documentation)
+as listed at [Documentation](https://developer.marvel.com/docs)
 
     characters = m.characters
     comics = m.comics
