@@ -169,5 +169,10 @@ ENV/
 # mypy
 .mypy_cache/
 
+# avoid committing IDE related config files.
 
+# vscode
 \.vscode/
+
+# Pycharm
+.idea
