@@ -14,10 +14,10 @@ This is an API wrapper for [Marvel](https://developer.marvel.com/docs).
 Usage
 =====
 
-Usage is as simple as it gets:
+Usage is as simple as it gets, LIMIT is not required, 20 is default, 100 is the maximum can be supported:
 
     from marvel import Marvel
-    m = Marvel(PUBLIC_KEY, PRIVATE_KEY)
+    m = Marvel(PUBLIC_KEY, PRIVATE_KEY, LIMIT)
 
 Now there are six objects presented namely, `characters`, `comics`, `creators`, `events`, `series` and `stories`
 as listed at [Developers](https://developer.marvel.com/documentation/entity_types)
